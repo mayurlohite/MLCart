@@ -1,0 +1,118 @@
+﻿input,
+select,
+textarea {
+
+}
+
+.table > thead > tr > td,
+.table > tbody > tr > td {
+    vertical-align: middle !important;
+}
+
+.input-stack-margin {
+    margin: 2px;
+}
+
+.fa.true-icon {
+    color: #007FCC;
+    font-size: 20px;
+}
+
+.fa.false-icon {
+    color: #D22D2D;
+    font-size: 20px;
+}
+
+.selected {
+    background-color: #b1b1b1;
+}
+
+.selected:hover {
+    background-color: #9a9a9a !important;
+}
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.thumbnail-img {
+    margin-top: 5px;
+    height: 150px !important;
+    width: 150px !important;
+}
+
+.thumbnail > .caption {
+    padding-top: 0px;
+}
+
+.thumbnail-title {
+    font-size: 16px;
+    line-height: normal;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.product-img-sm {
+    height: 96px !important;
+    width: 96px !important;
+}
+
+.product-img-md {
+    height: 128px !important;
+    width: 128px !important;
+}
+
+.morris-hover.morris-default-style {
+    color: #f9f9f9;
+    background: rgba(0, 0, 0, 0.8);
+    border: solid 2px rgba(0, 0, 0, 0.9);
+    font-weight: 600;
+    font-size: 14px;
+}
+
+/*
+.morris-hover.morris-default-style .morris-hover-row-label { }
+.morris-hover.morris-default-style .morris-hover-point { }
+*/
+
+.message-read {
+    background-color: #f9f9f9;
+}
+
+.message-unread {
+    font-weight: bold;
+}
+
+.message-title {
+    max-width: 300px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.message-title > span {
+    color: #333;
+}
+
+.message-table tbody tr {
+    cursor: pointer;
+}
+
+.reply-content {
+    margin: 12px;
+}
+
+.clickable-text {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.clickable-text:hover {
+    color: #15c;
+}

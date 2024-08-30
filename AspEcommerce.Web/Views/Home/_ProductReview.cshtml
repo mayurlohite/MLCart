@@ -1,0 +1,182 @@
+﻿@model ProductModel
+<div class="container">
+    <div class="col-md-12">
+        <table class="review-table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <td colspan="2" class="review-rating-result">
+                        <h6>Customer reviews of @Model.Name</h6>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <small id="five-star"> (0)</small>
+                                </div>
+                                <div>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <small id="four-star"> (0)</small>
+                                </div>
+                                <div>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <small id="three-star"> (0)</small>
+                                </div>
+                                <div>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <small id="two-star"> (0)</small>
+                                </div>
+                                <div>
+                                    <i class="fa fa-star star-active"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <i class="fa fa-star star-inactive"></i>
+                                    <small id="one-star"> (0)</small>
+                                </div>
+                            </div>
+                            <div class="col-md-9" style="padding-top: 25px;">
+                                <div style="margin-bottom: 3px;">Share your thoughts with other customers</div>
+                                @{ 
+                                    var reviewText = "Write a review";
+                                    if (ViewData["ProductReviewer"] != null && (bool)ViewData["ProductReviewer"])
+                                    {
+                                        reviewText = "Edit your review";
+                                    }
+                                }
+                                <a asp-area="" asp-controller="CreateReview" asp-action="@Model.Id" class="btn btn-secondary">@reviewText</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
+            <tbody id="review-container"></tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        var template = `
+            <tr>
+                <th>
+                    <ul>
+                        <li class ="r-user">_user_placeholder</li>
+                        <li class ="r-date">_date_placeholder</li>
+                        <li class ="r-verified">_verified_placeholder</li>
+                    </ul>
+                </th>
+                <td>
+                    <div>
+                        _star_placeholder
+                        <span class ="review-title">_title_placeholder</span>
+                    </div>
+
+                    <div class ="review-message">
+                        <p>_message_placeholder</p>
+                        <span class ="date-edited text-muted">_date_modified_placeholder</span>
+                    </div>
+                    <p class ="helpful text-muted">
+                        Did you find this review helpful?
+                        <button class ="btn btn-sm btn-secondary">Yes</button>
+                        <button class ="btn btn-sm btn-secondary">No</button>
+                    </p>
+                </td>
+            </tr>
+        `
+
+        // get product review
+        $('a[data-toggle="tab"').on('shown.bs.tab', function (e) {
+            if (e.target.id === 'reviews') {
+                $('#review-container').append("<div>Loading...</div>");
+                $.ajax({
+                    type: 'GET',
+                    url: '/home/productreview/@Model.Id',
+                    dataType: 'Json',
+                    success: function (data) {
+                        $('#review-container').empty(); // remove existing dom
+
+                        let one = 0, two = 0, three = 0, four = 0, five = 0;
+
+                        if (data.length > 0) {
+                            $.each(data, function (i, item) {
+
+                                let review = template;
+                                review = review.replace('_user_placeholder', item.username);
+                                review = review.replace('_date_placeholder', item.createdOn);
+                                review = review.replace('_star_placeholder', createStar(item.rating));
+                                review = review.replace('_title_placeholder', item.title);
+                                review = review.replace('_message_placeholder', item.message);
+
+                                if (item.dateModified !== '1/1/0001 12:00:00 AM')
+                                    review = review.replace('_date_modified_placeholder', 'Last edited: ' + item.dateModified);
+                                else
+                                    review = review.replace('_date_modified_placeholder', '');
+
+                                if (item.isVerifiedOwner)
+                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-check verified-check"></i> Verified Purchase');
+                                else
+                                    review = review.replace('_verified_placeholder', '<i class ="fa fa-close verified-x"></i> Verified Purchase');
+
+                                switch (item.rating) {
+                                    case 1: one++; break;
+                                    case 2: two++; break;
+                                    case 3: three++; break;
+                                    case 4: four++; break;
+                                    case 5: five++; break;
+                                }
+
+                                $('#review-container').append(review);
+                            });
+                        } else {
+                            $('#review-container').append('<h5 style="text-align: center; padding: 20px;">There are no reviews yet...</div>');
+                        }   
+
+                        // set review count and percentage
+                        $('#one-star').empty();
+                        $('#one-star').append(one / data.length * 100 + '% (' + one + ')');
+
+                        $('#two-star').empty();
+                        $('#two-star').append(two / data.length * 100 + '% (' + two + ')');
+
+                        $('#three-star').empty();
+                        $('#three-star').append(three / data.length * 100 + '% (' + three + ')');
+
+                        $('#four-star').empty();
+                        $('#four-star').append(four / data.length * 100 + '% (' + four + ')');
+
+                        $('#five-star').empty();
+                        $('#five-star').append(five / data.length * 100 + '% (' + five + ')');
+                    }
+                });
+            }
+        });
+
+        function createStar(count) {
+            let starTemplate = '';
+            for (i = 0; i < count; i++) {
+                starTemplate += '<i class="fa fa-star star-active"></i>';
+            }
+
+            for (i = 0; i < 5 - count; i++) {
+                starTemplate += '<i class="fa fa-star star-inactive"></i>';
+            }
+
+            return starTemplate;
+        };
+    });
+</script>
