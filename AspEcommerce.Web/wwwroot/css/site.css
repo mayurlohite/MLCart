@@ -1,0 +1,411 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-bottom: 20px;
+    margin-bottom: 60px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.max-width {
+    max-width: 100%;
+}
+
+ul {
+    list-style: none;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    line-height: 60px; /* Vertically center the text there */
+    background-color: #f5f5f5;
+}
+
+.card {
+    padding-bottom: 50px;
+    margin-bottom: 25px;
+}
+
+.card.order-history {
+    padding-bottom: 0px;
+}
+
+.card-img-top {
+    max-width: 170px;
+    min-height: 170px;
+    max-height: 170px;
+    padding-top: 10px;
+}
+
+a.card-title {
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 18px;
+    margin-bottom: 0px;
+}
+
+.card-text:last-child {
+    margin-bottom: -10px;
+}
+
+.card-footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.cart-item-image {
+    width: auto;
+    height: auto;
+    max-width: 96px;
+    max-height: 96px;
+}
+
+.product-main-image {
+    width: auto;
+    height: auto;
+    max-width: 256px;
+    max-height: 256px;
+    cursor: pointer;
+}
+
+.table-specification {
+    font-size: 13px;
+}
+
+.table-specification-title {
+    font-size: 1.25em;
+    width: 20%;
+}
+
+.row-side {
+    display: block;
+    float: left;
+    width: 250px;
+}
+
+.left-nav {
+    padding-right: 20px;
+    border-right: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.sort-key {
+    font-size: 14px;
+}
+
+.badge-delete {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.badge-delete:hover {
+    color: red;
+}
+
+.open-admin {
+    font-size: 18px;
+    position: fixed;
+    right: 0;
+    background-color: #3c8dbc;
+    padding: 8px;
+    z-index: 998;
+    color: white;
+}
+
+.close-admin {
+    font-size: 18px;
+    margin: 10px 0 0 10px;
+    color: white;
+}
+
+.close-admin > .fa-close:hover {
+    color: red;
+}
+
+.admin-menu-body {
+    height: 200px;
+    width: 200px;
+    position: fixed;
+    z-index: 999;
+    right: 0;
+    background-color: #3c8dbc;
+    overflow-x: hidden;
+    transition: 0.5s;
+    right: -200px;
+}
+
+.admin-menu-body > div > ul {
+    list-style: none;
+}
+
+.admin-menu-body > div > ul > li > a {
+    color: white;
+    text-decoration: none;
+}
+
+.admin-menu-body > div > ul > li > a:hover {
+    color: rgba(0, 0, 0, .85);
+}
+
+.admin-menu-body > div > ul > li {
+    border-bottom: 2px solid white;
+    margin-bottom: 5px;
+}
+
+.product-image-container {
+    margin-top: 12px;
+}
+
+.product-image-thumbnail-container {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid #ddd;
+    cursor: pointer; 
+}
+
+.product-image-thumbnail {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.tab-pane {
+    border-left: solid 1px #ddd;
+    border-right: solid 1px #ddd;
+    min-height: 360px;
+}
+
+.lightbox-slide {
+    display: none;
+    width: 100%;
+    height: 100%;
+}
+
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 12px;
+    margin-top: -50px;
+    font-weight: bold;
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.next {
+    right: 0;
+}
+
+.prev {
+    left: 0;
+}
+
+.prev:hover,
+.next:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.close {
+    font-size: 36px;
+}
+
+.review-table {
+    width: 100%;
+}
+
+.review-table tbody th {
+    width: 20%;
+    padding: 12px;
+    vertical-align: top;
+    font-weight: 400;
+    text-align: left;
+    border-right: 1px solid rgba(0, 0, 0, .1) !important;
+}
+
+.review-table tbody tr {
+    border-bottom: 2px solid gray!important;
+}
+
+.review-table tbody tr:last-child {
+    border-bottom: none!important;
+}
+
+.review-table tbody td {
+    padding: 5px;
+}
+
+.review-table tbody th ul {
+    margin: 0;
+    padding: 0;
+}
+
+.review-table tbody th ul li {
+    margin-bottom: 1px;
+}
+
+.review-table tbody th ul li:last-child {
+    margin-bottom: 0;
+}
+
+li.r-date {
+    min-width: 155px;
+    font-size: 14px !important;
+}
+
+li.r-user {
+    font-weight: 500;
+}
+
+.r-verified {
+    font-size: 14px;
+}
+
+.verified-check {
+    color: #53c14d;
+}
+
+.verified-x {
+    color: #f83838;
+}
+
+.review-title {
+    font-weight: 500;
+}
+
+.review-message {
+    position: relative;
+    min-height: 150px;
+    padding: 10px 5px 10px 5px;
+    border-top: 1px solid rgba(0, 0, 0, .1) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, .1) !important;
+}
+
+.date-edited {
+    position: absolute;
+    bottom: 0;
+    font-size: 12px;
+}
+
+.helpful {
+    margin: 0;  
+    padding-top: .5em;
+    padding-bottom: .25em;
+    text-align: right;
+    clear: both;
+}
+
+.review-rating-result {
+    padding: 14px;
+    border-bottom: 1px solid gray !important;
+    background-color: rgba(0, 0, 0, .05);
+}
+
+.star-active {
+    color: #fbbc05;
+}
+
+.star-inactive {
+    color: rgba(0, 0, 0, .35);
+}
+
+.star {
+    margin: 0 3px 0 3px;
+}
+
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    width: 175px;
+    font-size: 28px;
+}
+
+.star-rating input {
+    display:none;
+}
+
+.star-rating label {
+    color: rgba(0, 0, 0, .35);
+    cursor: pointer;
+}
+
+.star-rating :checked ~ label {
+    color: #fbbc05;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #e7711b;
+}
+
+.dd-mobile {
+    margin-bottom: 0;
+    background-color: #ccc !important;
+}
+
+@media (max-width: 992px) { 
+    .nav-link {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+}
+
+.sale-badge{
+    position: absolute;
+    top: -5px;
+    left: -20px;
+    font-size: 1.35rem;
+    -webkit-transform: rotate(-30deg);
+    -moz-transform: rotate(-30deg);
+    -o-transform: rotate(-30deg);
+    -ms-transform: rotate(-30deg);
+    transform: rotate(-30deg);
+}
+
+.billing-control-group {
+    margin-bottom: 1rem;
+    user-select: none;
+}
+
+.billing-control-group span {
+    color: #0275d8;
+    cursor: pointer;
+}
+
+.billing-control-group span:hover {
+    color: #014c8c;
+    text-decoration: underline;
+}
+
+.review-count {
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.review-count:hover {
+    color: #014c8c !important;
+}

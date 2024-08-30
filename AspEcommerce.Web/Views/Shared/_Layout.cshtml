@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] | aspCart</title>
+
+    <environment names="Development">
+        <link href="~/lib/bootstrap-4.0.0-alpha.6-dist/css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="~/css/site.css" />
+
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap-4.0.0-alpha.6-dist/js/tether.min.js"></script>
+        <script src="~/lib/bootstrap-4.0.0-alpha.6-dist/js/bootstrap.min.js"></script>
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+
+    <environment names="Staging,Production">
+        <link href="~/dist/site.min.css" rel="stylesheet" />
+        <script src="~/dist/site.min.js"></script>
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand my-1">aspCart</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link my-1">Home</a>
+                </li>
+                <li class="nav-item">
+                    @await Component.InvokeAsync("Category")
+                </li>
+                <li class="nav-item">
+                    <form asp-area="" asp-controller="Home" asp-action="ProductSearch" method="get" class="form-inline">
+                        <input class="form-control mr-sm-2 my-1" name="name" placeholder="Search">
+                        <button class="btn btn-outline-success my-1" type="submit">Search</button>
+                    </form>
+                </li>
+            </ul>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </nav>
+
+    @if (User.IsInRole("Admin"))
+
+    {
+        <div class="open-admin" id="open-admin">
+            <span class="fa fa-navicon">&nbsp;Admin</span>
+        </div>
+
+        <div class="admin-menu-body" id="admin-menu-body">
+            <div class="close-admin">
+                <span class="fa fa-close" id="close-admin"></span>
+            </div>
+            <div>
+                <ul>
+                    <li>
+                        <a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin dashboard</a>
+                    </li>
+                    @if (ViewData["ProductId"] != null)
+                    {
+                        <li>
+                            <a asp-area="Admin" asp-controller="Product" asp-action="Edit" asp-route-id="@ViewData["ProductId"]">Edit product</a>
+                        </li>
+                    }
+                    <li>
+                        <a asp-area="Admin" asp-controller="Product" asp-action="List">Product Catalog</a>
+                    </li>
+                    <li>
+                        <a asp-area="Admin" asp-controller="Order" asp-action="List">Order List</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+
+    <br />
+    <div class="container-fluid">
+        @RenderBody()
+    </div>
+
+    @await Html.PartialAsync("_Footer")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+<script>
+    $(function () {
+        if (JSON.parse(sessionStorage.getItem("isAdminMenuOpen")) === true) {
+            document.getElementById("admin-menu-body").style.transition = "0s";
+            document.getElementById("admin-menu-body").style.right = "0px";
+        }
+    });
+
+    $(function () {
+        $('#open-admin').on('click', function () {
+            document.getElementById("admin-menu-body").style.right = "0px";
+            sessionStorage.setItem("isAdminMenuOpen", JSON.stringify(true));
+        });
+
+        $('#close-admin').on('click', function () {
+            document.getElementById("admin-menu-body").style.transition = "0.5s";
+            document.getElementById("admin-menu-body").style.right = "-200px";
+            sessionStorage.setItem("isAdminMenuOpen", JSON.stringify(false));
+        });
+    });
+</script>

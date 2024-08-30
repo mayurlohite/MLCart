@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ProductModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container">
+    @if (Model.Count() > 0)
+    {
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 col-xl-3">
+                    <div class="card">
+                        @if (product.OldPrice > 0)
+                        {
+                            <span class="badge badge-pill badge-danger sale-badge">Sale</span> <!-- discount badge -->
+                        }
+                        <center>
+                            <a href="/Product/@product.SeoUrl">
+                                @if (product.MainImage != null)
+                                {
+                                    <img class="card-img-top img-fluid" src="@product.MainImage?w=170&h=170" alt="@product.Name" />
+                                }
+                                else
+                                {
+                                    <img class="card-img-top img-fluid" src="~/images/system/no-image.png" alt="@product.Name" />
+                                }
+                            </a>
+                        </center>
+                        <div class="card-block">
+                            <a href="/Product/@product.SeoUrl" class="card-title text-muted" title="@product.Name">@product.Name</a>
+                            <div class="card-text">
+                                @if (product.OldPrice > 0)
+                                {
+                                    <strike class="text-muted">@product.OldPrice.ToString("C2")</strike> @Html.Raw(product.Price.ToString("C2"));
+                                }
+                                else
+                                {
+                                    @product.Price.ToString("C2")
+                                }
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <form asp-area="" asp-controller="Cart" asp-action="Add" method="post">
+                                <input type="hidden" value="@product.Id" name="id" />
+                                <button type="submit" id="addToCart" class="btn btn-primary btn-sm">Add to cart</button>
+                                @if (product.Rating > 0)
+                                {
+                                    <div class="float-right">
+                                        <i class="fa fa-star star-active"></i>
+                                        <span>@product.Rating.ToString("N2")</span>
+                                    </div>
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="col-md-12">
+            <h5>No product on database</h5>
+        </div>
+    }
+</div>
