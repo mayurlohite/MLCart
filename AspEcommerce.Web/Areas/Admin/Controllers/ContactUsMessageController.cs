@@ -85,7 +85,7 @@ namespace AspEcommerce.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Send(string To, string Subject, string Reply)
         {
-            var from = new EmailAddress("no-reply@aspcart.com", "aspcart no-reply");
+            var from = new EmailAddress("mayur.lohite@outlook.com", "Mayur Lohite");
             var to = new EmailAddress(To);
             var subject = "Re: " + Subject;
 

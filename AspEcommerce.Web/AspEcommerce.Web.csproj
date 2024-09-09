@@ -28,7 +28,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="NewFolder\" />
     <Folder Include="wwwroot\lib\bootstrap-4.0.0-alpha.6-dist\" />
   </ItemGroup>

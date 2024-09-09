@@ -886,7 +886,7 @@ namespace AspEcommerce.Web.Helpers
 
             var contactUsMessageList = new List<ContactUsMessage>()
             {
-                new ContactUsMessage { Email = "user@aspcart.com", Title = "Lorem Ipsum", Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat dolor, semper quis ultricies quis, commodo nec nulla. Sed rhoncus in nunc eget fringilla. Phasellus vitae arcu lorem. Quisque elementum dignissim lacus. Donec ac rutrum arcu. Donec vitae tristique metus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.", Read = false, SendDate = DateTime.Now },
+                new ContactUsMessage { Email = "user@mlcart.com", Title = "Lorem Ipsum", Message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus erat dolor, semper quis ultricies quis, commodo nec nulla. Sed rhoncus in nunc eget fringilla. Phasellus vitae arcu lorem. Quisque elementum dignissim lacus. Donec ac rutrum arcu. Donec vitae tristique metus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.", Read = false, SendDate = DateTime.Now },
                 new ContactUsMessage { Email = "anon@anon.com", Title = "blah blah blaahhh", Message = "blaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaah", Read = true, SendDate = DateTime.Now.AddMinutes(-1) }
             };
             context.ContactUsMessage.AddRange(contactUsMessageList);
