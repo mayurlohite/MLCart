@@ -178,22 +178,21 @@ namespace AspEcommerce.Infrastructure.Services.Catalog
             // category filter
             if (categoryFilter != null && categoryFilter.Length > 0)
             {
-                result = result.Where(x => x
-                    .Categories.Select(c => c.Category.Name.ToLower())
-                    .Intersect(categoryFilter.Select(cf => cf.ToLower()))
-                    .Count() > 0
-                );
+                categoryFilter = categoryFilter.Select(x => x.ToLower()).ToArray();
+                result = result
+                       .Where(a => a.Categories
+                       .Where(t => categoryFilter.Contains(t.Category.Name.ToLower()))
+                       .Any());
             }
 
             // manufacturer filter
             if (manufacturerFilter != null && manufacturerFilter.Length > 0)
             {
-                result = result.Where(x => x
-                    .Manufacturers
-                    .Select(c => c.Manufacturer.Name.ToLower())
-                    .Intersect(manufacturerFilter.Select(mf => mf.ToLower()))
-                    .Count() > 0
-                );
+                manufacturerFilter = manufacturerFilter.Select(x => x.ToLower()).ToArray();
+                result = result
+                         .Where(a => a.Manufacturers
+                         .Where(t => manufacturerFilter.Contains(t.Manufacturer.Name))
+                         .Any());
             }
 
             // price filter

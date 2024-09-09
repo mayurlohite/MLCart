@@ -68,7 +68,7 @@ builder.Services.Configure<UserAccount>(builder.Configuration.GetSection("UserAc
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(60);
-    options.Cookie.Name = "aspCart";
+    options.Cookie.Name = "MLCart";
 });
 
 //Configure Automapper
